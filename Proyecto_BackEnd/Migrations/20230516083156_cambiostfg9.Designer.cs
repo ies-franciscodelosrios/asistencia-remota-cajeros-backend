@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 using Proyecto_BackEnd.Context;
@@ -11,9 +12,11 @@ using Proyecto_BackEnd.Context;
 namespace ProyectoBackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230516083156_cambiostfg9")]
+    partial class cambiostfg9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,8 +105,8 @@ namespace ProyectoBackEnd.Migrations
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<float?>("note")
-                        .HasColumnType("BINARY_FLOAT");
+                    b.Property<double?>("note")
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.Property<string>("password")
                         .IsRequired()

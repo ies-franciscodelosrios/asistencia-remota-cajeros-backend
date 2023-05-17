@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 using Proyecto_BackEnd.Context;
@@ -11,9 +12,11 @@ using Proyecto_BackEnd.Context;
 namespace ProyectoBackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230515183932_cambiostfg4")]
+    partial class cambiostfg4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,9 +85,6 @@ namespace ProyectoBackEnd.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.Property<int?>("rating")
-                        .HasColumnType("NUMBER(10)");
-
                     b.HasKey("id");
 
                     b.HasIndex("CajeroId");
@@ -102,12 +102,12 @@ namespace ProyectoBackEnd.Migrations
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<float?>("note")
-                        .HasColumnType("BINARY_FLOAT");
-
                     b.Property<string>("password")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("rating")
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("username")
                         .IsRequired()

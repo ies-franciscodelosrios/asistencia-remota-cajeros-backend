@@ -29,6 +29,12 @@ namespace Proyecto_BackEnd.Controllers
             
         }
 
+        [HttpPut("Update/{id}")]
+        public void Update(int id, [FromBody] int note)
+        {
+            _userService.update(id, note);
+        }
+
         [HttpPost]
         public void Insert([FromBody]UserModel user)
         {

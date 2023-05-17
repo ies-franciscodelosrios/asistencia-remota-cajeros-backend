@@ -32,6 +32,11 @@ namespace Proyecto_BackEnd.Service
             _repository.Update(id, c);
         }
 
+        public void UpdateRating(int id, CallModel c, int idUser)
+        {
+            _repository.UpdateRating(id, c, idUser);
+        }
+
         public CallModel Get(int id)
         {
            return _repository.get(id);
@@ -45,6 +50,21 @@ namespace Proyecto_BackEnd.Service
         public void DeleteAll()
         {
             _repository.DeleteAll();
+        }
+
+        public int GetQueueNumber(int id)
+        {
+            return _repository.GetQueueNumber(id);
+        }
+
+        public decimal GetDurationEstimated()
+        {
+            return _repository.GetDurationEstimated();
+        }
+
+        public List<CallModel> GetAllByUser(int idUser)
+        {
+            return _repository.GetAllByUser(idUser);
         }
     }
 }

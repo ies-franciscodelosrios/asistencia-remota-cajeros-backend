@@ -18,6 +18,11 @@ namespace Proyecto_BackEnd.Service
             _repository = repository;
         }
 
+        public void update (int id, int note)
+        {
+            _repository.Update(id, note);
+        }
+
         public void Insert(UserModel u)
         {
             _repository.Insert(u);

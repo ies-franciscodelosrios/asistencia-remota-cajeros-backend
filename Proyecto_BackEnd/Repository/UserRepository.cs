@@ -16,6 +16,16 @@ namespace Proyecto_BackEnd.Repository
             _dbContext.SaveChanges();
         }
 
+        public void Update(int id, int c)
+        {
+            UserModel aux = _dbContext.Users.FirstOrDefault(p => p.id == id);
+            if (aux != null)
+            {
+                aux.note = c;
+                _dbContext.SaveChanges();
+            }
+        }
+
         public List<UserModel> GetAll()
         {
             return _dbContext.Users.ToList();

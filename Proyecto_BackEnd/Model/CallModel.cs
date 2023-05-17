@@ -12,6 +12,9 @@ namespace Proyecto_BackEnd.Model
         public string p2p { get; set; }
         public Estado estado { get; set; }
         public DateTime date { get; set; }
+        public decimal duration { get; set; }
+
+        public Rating? rating { get; set; }
         public int CajeroId { get; set; }
         public int? UserId { get; set; }
     }

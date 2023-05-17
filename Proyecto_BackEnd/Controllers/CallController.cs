@@ -55,10 +55,22 @@ namespace Proyecto_BackEnd.Controllers
             sendMessage(list);
         }
 
+        [HttpPut("UpdateRating/{id}")]
+        public void UpdateRating(int id, [FromBody] CallModel c, int idUser)
+        {
+            _call.UpdateRating(id, c, idUser);
+        }
+
         [HttpGet("get/{id}")]
         public CallModel CallModelGet(int id)
         {
             return _call.Get(id);
+        }
+
+        [HttpGet("GetAllByUser/{id}")]
+        public List<CallModel> GetAllByUser(int id)
+        {
+            return _call.GetAllByUser(id);
         }
 
         [HttpDelete("Delete/{id}")]
@@ -68,10 +80,23 @@ namespace Proyecto_BackEnd.Controllers
             List<CallModel> list = _call.GetAllByEstado0();
             sendMessage(list);
         }
+
         [HttpDelete("DeleteAll")]
         public void DeleteAll()
         {
             _call.DeleteAll();
+        }
+
+        [HttpGet("QueueNumber/{id}")]
+        public int GetQueueNumber(int id)
+        {
+            return _call.GetQueueNumber(id);
+        }
+
+        [HttpGet("DurationEstimated")]
+        public decimal GetDurationEstimated()
+        {
+            return _call.GetDurationEstimated();
         }
 
     }

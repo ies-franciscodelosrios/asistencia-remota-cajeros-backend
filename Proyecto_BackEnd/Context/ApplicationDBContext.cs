@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Proyecto_BackEnd.Model;
+using System.Reflection.Emit;
 
 namespace Proyecto_BackEnd.Context
 {
@@ -28,6 +29,10 @@ namespace Proyecto_BackEnd.Context
                 .HasOne<CajeroModel>()
                 .WithMany()
                 .HasForeignKey(p => p.CajeroId);
+
+            builder.Entity<CallModel>()
+                .Property(c => c.duration)
+                .HasPrecision(5, 2);
         }
     }
 }
