@@ -22,6 +22,11 @@ namespace Proyecto_BackEnd.Service
             return _repository.GetAll();
         }
 
+        public CajeroModel GetByIp(string ip)
+        {
+            return _repository.GetByIp(ip);
+        }
+
         public CajeroModel GetById(int id)
         {
             return _repository.Get(id);

@@ -22,6 +22,20 @@ namespace Proyecto_BackEnd.Repository
             return _dbContext.Cashiers.ToList();
         }
 
+        public CajeroModel GetByIp(string ip)
+        {
+            var aux = new CajeroModel();
+            aux = _dbContext.Cashiers.FirstOrDefault(u => u.ip == ip);
+            if (aux != null)
+            {
+                return aux;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public CajeroModel Get(int id)
         {
             var aux = new CajeroModel();

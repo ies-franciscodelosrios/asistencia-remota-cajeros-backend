@@ -21,6 +21,12 @@ namespace Proyecto_BackEnd.Controllers
             return _cajeroService.GetAll();
         }
 
+        [HttpGet("getByIp/{ip}")]
+        public CajeroModel GetByIp(string ip)
+        {
+            return _cajeroService.GetByIp(ip);
+        }
+
         [HttpPost]
         public void Insert([FromBody] CajeroModel model)
         {
