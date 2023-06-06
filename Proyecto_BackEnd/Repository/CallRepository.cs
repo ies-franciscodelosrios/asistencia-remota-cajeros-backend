@@ -2,6 +2,7 @@
 using Microsoft.OpenApi.Models;
 using Proyecto_BackEnd.Context;
 using Proyecto_BackEnd.Model;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Intrinsics.X86;
 
@@ -77,6 +78,7 @@ namespace Proyecto_BackEnd.Repository
             {
                 aux.rating= c.rating;
                 _dbContext.SaveChanges();
+                rating = (int)aux.rating;
                 if (c.rating != 0)
                 {
                     List<CallModel> list = GetAllByUser(idUser);
