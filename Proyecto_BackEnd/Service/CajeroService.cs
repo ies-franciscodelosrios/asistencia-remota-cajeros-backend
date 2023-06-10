@@ -1,4 +1,5 @@
-﻿using Proyecto_BackEnd.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using Proyecto_BackEnd.Model;
 using Proyecto_BackEnd.Repository;
 
 namespace Proyecto_BackEnd.Service
@@ -30,6 +31,11 @@ namespace Proyecto_BackEnd.Service
         public CajeroModel GetById(int id)
         {
             return _repository.Get(id);
+        }
+
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
         }
     }
 }

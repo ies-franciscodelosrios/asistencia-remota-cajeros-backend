@@ -33,35 +33,6 @@ namespace Proyecto_BackEnd.Service
         {
             return _repository.get(username, password);
         }
-
-        //public string GetAll()
-        //{
-        //    OracleConnection con = new OracleConnection(_configuration.GetConnectionString("DefaultConnection").ToString());
-        //    OracleDataAdapter da = new OracleDataAdapter("SELECT * FROM USERS", con);
-        //    DataTable dt = new DataTable();
-        //    da.Fill(dt);
-        //    List<UserModel> list = new List<UserModel>();
-        //    if (dt.Rows.Count > 0)
-        //    {
-
-        //        for (int i = 0; i < dt.Rows.Count; i++)
-        //        {
-        //            UserModel model = new UserModel();
-        //            model.id = Convert.ToInt32(dt.Rows[i][""]);
-        //            model.username = Convert.ToString(dt.Rows[i][""]);
-        //            model.password = Convert.ToString(dt.Rows[i][""]);
-        //            list.Add(model);
-        //        }
-        //    }
-        //    if (list.Count > 0)
-        //    {
-        //        return JsonConvert.SerializeObject(list);
-        //    }
-        //    else
-        //    {
-        //        return JsonConvert.SerializeObject(null);
-        //    }
-        //}
         public List<UserModel> GetAll()
         {
             return _repository.GetAll();

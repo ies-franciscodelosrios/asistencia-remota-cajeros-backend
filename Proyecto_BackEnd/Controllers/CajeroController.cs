@@ -16,27 +16,98 @@ namespace Proyecto_BackEnd.Controllers
         }
 
         [HttpGet("GetAll")]
-        public List<CajeroModel> GetAll()
+        public IActionResult GetAll()
         {
-            return _cajeroService.GetAll();
+            try
+            {
+                List<CajeroModel> cajeros = _cajeroService.GetAll();
+                if (cajeros != null && cajeros.Count > 0)
+                {
+                    return Ok(cajeros);
+                }
+                else
+                {
+                    return NotFound("No se encontraron cajeros.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al obtener los cajeros: " + ex.Message);
+            }
         }
 
         [HttpGet("getByIp/{ip}")]
-        public CajeroModel GetByIp(string ip)
+        public IActionResult GetByIp(string ip)
         {
-            return _cajeroService.GetByIp(ip);
+            try
+            {
+                CajeroModel cajero = _cajeroService.GetByIp(ip);
+                if (cajero != null)
+                {
+                    return Ok(cajero);
+                }
+                else
+                {
+                    return NotFound("No se encontró el cajero con la IP especificada.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al obtener el cajero: " + ex.Message);
+            }
         }
 
         [HttpPost]
-        public void Insert([FromBody] CajeroModel model)
+        public IActionResult Insert([FromBody] CajeroModel model)
         {
-            _cajeroService.Insert(model);
+            try
+            {
+                if (model == null)
+                {
+                    return BadRequest("El objeto Cajero es nulo.");
+                }
+                _cajeroService.Insert(model);
+                return Ok("Cajero insertado exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al insertar el cajero: " + ex.Message);
+            }
         }
 
         [HttpGet("get/{id}")]
-        public CajeroModel Get(int id)
+        public IActionResult Get(int id)
         {
-            return _cajeroService.GetById(id);
+            try
+            {
+                CajeroModel cajero = _cajeroService.GetById(id);
+                if (cajero != null)
+                {
+                    return Ok(cajero);
+                }
+                else
+                {
+                    return NotFound("No se encontró el cajero con el ID especificado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al obtener el cajero: " + ex.Message);
+            }
+        }
+
+        [HttpDelete("Delete/{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            try
+            {
+                _cajeroService.Delete(id);
+                return Ok("Cajero eliminado exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al eliminar el cajero: " + ex.Message);
+            }
         }
     }
 }

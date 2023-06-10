@@ -23,34 +23,96 @@ namespace Proyecto_BackEnd.Controllers
         }
 
         [HttpGet("GetAll")]
-        public List<UserModel> GetUsers()
+        public IActionResult GetUsers()
         {
-            return _userService.GetAll();
-            
+            try
+            {
+                List<UserModel> users = _userService.GetAll();
+                if (users != null && users.Count > 0)
+                {
+                    return Ok(users);
+                }
+                else
+                {
+                    return NotFound("No se encontraron usuarios.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al obtener los usuarios: " + ex.Message);
+            }
+
         }
 
         [HttpPut("Update/{id}")]
-        public void Update(int id, [FromBody] int note)
+        public IActionResult Update(int id, [FromBody] int note)
         {
-            _userService.update(id, note);
+            try
+            {
+                if (note < 0 || note > 5)
+                {
+                    return BadRequest("La nota debe estar entre 0 y 5.");
+                }
+                _userService.update(id, note);
+                return Ok("Usuario actualizado exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al actualizar el usuario: " + ex.Message);
+            }
         }
 
         [HttpPost]
-        public void Insert([FromBody]UserModel user)
+        public IActionResult Insert([FromBody]UserModel user)
         {
-            _userService.Insert(user);
+            try
+            {
+                if (user == null)
+                {
+                    return BadRequest("El objeto UserModel es nulo.");
+                }
+                _userService.Insert(user);
+                return Ok("Usuario insertado exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al insertar el usuario: " + ex.Message);
+            }
         }
 
         [HttpGet("get/{username}/{password}")]
-        public UserModel GetUser(string username, string password)
+        public IActionResult GetUser(string username, string password)
         {
-            return _userService.get(username, password);
+            try
+            {
+                UserModel user = _userService.get(username, password);
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+                else
+                {
+                    return NotFound("No se encontró el usuario con las credenciales especificadas.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al obtener el usuario: " + ex.Message);
+            }
         }
 
         [HttpDelete("Delete/{id}")]
-        public void DeleteUser(int id)
+        public IActionResult DeleteUser(int id)
         {
-            _userService.delete(id);
+            try
+            {
+                _userService.delete(id);
+                return Ok("Usuario eliminado exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al eliminar el usuario: " + ex.Message);
+            }
         }
     }
 }
